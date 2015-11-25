@@ -1,0 +1,20 @@
+
+<% form_action = action == :new ? subs_url : sub_url(sub) %>
+<% form_method = action == :new ? "POST" : "PATCH" %>
+
+<form action="<%= form_action %>" method="POST">
+  <input type="hidden" name="_method" value="<%= form_method %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label>Title
+    <input type="text" name="sub[title]" value="<%= sub.title %>">
+  </label>
+  <br>
+
+  <label>Description
+    <textarea name="sub[description]"><%= sub.description %></textarea>
+  </label>
+  <br>
+
+  <input type="submit">
+
+</form>

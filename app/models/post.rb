@@ -1,6 +1,8 @@
-class Post < ActiveRecord::Basehas_many :post_subs
+class Post < ActiveRecord::Base
+  validates :author, :title, :content, presence: true
+  validates :content, length: { maximum: 1000 }
 
-  has_many :post_subs, foreign_key: :post_id
+  has_many :post_subs, dependent: :destroy, inverse_of: :post
   has_many :subs, through: :post_subs, source: :sub
 
   belongs_to(
