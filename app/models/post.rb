@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
 
   has_many :post_subs, dependent: :destroy, inverse_of: :post
   has_many :subs, through: :post_subs, source: :sub
+  has_many :comments
 
   belongs_to(
     :author,

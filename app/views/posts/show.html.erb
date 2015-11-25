@@ -2,6 +2,23 @@
 
 <p><%= @post.content %></p>
 
+<h2>Comments</h2>
 
+<% @post.comments.each do |comment| %>
+  <p>Posted by: <%= comment.author.email %></p>
+  <%= comment.content %>
+<% end %>
+<br>
+<br>
+
+<h3>Subs posted on</h3>
+
+<% @post.subs.each do |sub| %>
+  <ul>
+    <li><%= link_to sub.title, sub_url(sub) %>
+  </ul>
+<% end %>
 
 <%= link_to "Edit Post", edit_post_url(@post) %>
+<br>
+<%= link_to "Comment", new_post_comment_url(@post) %>
