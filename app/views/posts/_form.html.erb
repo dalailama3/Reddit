@@ -1,0 +1,36 @@
+<% form_action = action == :new ? posts_url : post_url(post) %>
+<% form_method = action == :new ? "POST" : "PATCH" %>
+
+
+<form action="<%= posts_url %>" method="POST">
+  <input type="hidden" name="_method" value="<%= form_method %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"
+  <label>Title
+  <input type="text" name="post[title]" value="<%= post.title %>">
+  </label>
+  <br>
+
+  <label>Content
+    <textarea name="post[content]"><%= post.content %></textarea>
+  </label>
+
+  <br>
+
+  <h2>Subs</h2>
+
+  <% Sub.all.each do |sub| %>
+    <label>
+      <input type="checkbox"
+             name="post[sub_ids][]"
+             value="<%= sub.id %>"
+             <%= "checked" if post.sub_ids.include?(sub.id) %>>
+      <%= sub.title %>
+      <br>
+    </label>
+  <% end %>
+
+
+
+  <input type="submit">
+
+</form>
