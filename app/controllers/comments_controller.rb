@@ -1,4 +1,8 @@
 class CommentsController < ApplicationController
+  def show
+    @comment = Comment.find(params[:id])
+    render :show
+  end
   def new
     @comment = Comment.new
 
@@ -9,8 +13,15 @@ class CommentsController < ApplicationController
 
     @comment = Comment.new(comment_params)
     @comment.author_id = current_user.id
-    @comment.post_id = params[:comment][:post_id]
-    
+    if params[:comment][:parent_comment_id]
+      @parent_comment = Comment.find(params[:comment][:parent_comment_id])
+      @comment.parent_comment_id = @parent_comment.id
+    else
+      @comment.parent_comment_id = nil
+    end
+    @comment.post_id = params[:comment][:post_id] || @parent_comment.post_id
+
+
     if @comment.save
       redirect_to post_url(@comment.post)
     else

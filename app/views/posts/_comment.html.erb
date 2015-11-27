@@ -1,0 +1,11 @@
+<div class="comment">
+
+  <p><%= link_to comment.content, comment_url(comment) %></p>
+
+  <% if comment.child_comments %>
+    <ul>
+      <%= render partial: "comment", collection: comment.child_comments %>
+    <ul>
+  <% end %>
+
+</div>

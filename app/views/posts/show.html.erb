@@ -4,12 +4,11 @@
 
 <h2>Comments</h2>
 
-<% @post.comments.each do |comment| %>
-  <p>Posted by: <%= comment.author.email %></p>
-  <%= comment.content %>
-<% end %>
-<br>
-<br>
+<div id ="comments">
+  <%= render partial: "comment", collection: @top_level_comments %>
+
+</div>
+
 
 <h3>Subs posted on</h3>
 

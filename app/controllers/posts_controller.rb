@@ -2,6 +2,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @top_level_comments = @post.comments.where(parent_comment_id: nil)
     render :show
   end
   def new
